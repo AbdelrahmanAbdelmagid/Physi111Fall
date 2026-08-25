@@ -1,0 +1,58 @@
+<input type="file" id="folderInput" webkitdirectory directory multiple>
+<p id="status">Select your Phys111Fall folder once to save files locally.</p>
+
+<script>
+  const DB_NAME = 'Phys111Storage';
+  const STORE_NAME = 'files';
+
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, 1);
+      request.onupgradeneeded = () => request.result.createObjectStore(STORE_NAME);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  }
+
+  async function saveFiles(files) {
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    for (const file of files) {
+      const arrayBuffer = await file.arrayBuffer();
+      store.put({ name: file.name, data: arrayBuffer, type: file.type });
+    }
+    document.getElementById('status').innerText = 'Files saved permanently!';
+    loadSavedFiles();
+  }
+
+  async function loadSavedFiles() {
+    const db = await openDB();
+    const tx = db.transaction(STORE_NAME, 'readonly');
+    const store = tx.objectStore(STORE_NAME);
+    const request = store.openCursor();
+    
+    request.onsuccess = (e) => {
+      const cursor = e.target.result;
+      if (cursor) {
+        const { name, data, type } = cursor.value;
+        const blob = new Blob([data], { type });
+        const objectUrl = URL.createObjectURL(blob);
+        
+        // Update all links pointing to this file name
+        document.querySelectorAll(`a[href$="${name}"]`).forEach(link => {
+          link.href = objectUrl;
+          link.target = "_blank";
+        });
+        cursor.continue();
+      }
+    };
+  }
+
+  document.getElementById('folderInput').addEventListener('change', (e) => {
+    saveFiles(e.target.files);
+  });
+
+  // Load automatically on page load if already saved
+  window.addEventListener('DOMContentLoaded', loadSavedFiles);
+</script>
