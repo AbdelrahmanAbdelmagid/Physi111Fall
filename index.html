@@ -1,58 +1,154 @@
-<input type="file" id="folderInput" webkitdirectory directory multiple>
-<p id="status">Select your Phys111Fall folder once to save files locally.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHYS 111-105 Schedule & Resources</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 15px;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            color: #1a252f;
+            margin-bottom: 15px;
+        }
+        .table-container {
+            overflow-x: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            background: #ffffff;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 1100px;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid #dcdcdc;
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        tr.header-row {
+            background-color: #eef2f7;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .row-header {
+            font-weight: bold;
+            background-color: #e2e8f0 !important;
+            text-align: left;
+            position: sticky;
+            left: 0;
+            z-index: 1;
+            min-width: 130px;
+        }
+        .other-data {
+            background-color: #fff9c4 !important;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin: 2px 0;
+            word-break: break-word;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #004080;
+        }
+    </style>
+</head>
+<body>
 
-<script>
-  const DB_NAME = 'Phys111Storage';
-  const STORE_NAME = 'files';
+    <h2>PHYS 111-105 Course Schedule & Local Files</h2>
 
-  function openDB() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, 1);
-      request.onupgradeneeded = () => request.result.createObjectStore(STORE_NAME);
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
-    });
-  }
+    <div class="table-container">
+        <table>
+            <!-- Weeks -->
+            <tr class="header-row">
+                <td class="row-header">Weeks</td>
+                <td>Week 1</td><td>Week 2</td><td>Week 3</td><td>Week 4</td><td>Week 5</td><td>Week 6</td><td>Week 7</td><td>Week 8</td><td>Week 9</td><td>Week 10</td><td>Week 11</td><td>Week 12</td>
+            </tr>
+            <!-- Experiment NO. -->
+            <tr class="header-row">
+                <td class="row-header">Experiment NO.</td>
+                <td>Exp 0 & Exp 1</td><td>Exp 2</td><td>Exp 2</td><td>Exp 2</td><td>Exp 3</td><td>Exp 4</td><td>Exp 5</td><td>Exp 6</td><td>Exp 7</td><td>Exp 8</td><td>Exp 11</td><td>Exp 13</td>
+            </tr>
+            <!-- Experiment Name -->
+            <tr>
+                <td class="row-header">Experiment Name</td>
+                <td>Intro to Stats & Fine Measurements</td>
+                <td>Kinematics Part 1</td>
+                <td>Kinematics Part 2</td>
+                <td>Kinematics Part 3</td>
+                <td>Newton's Law</td>
+                <td>Friction</td>
+                <td>Centripetal</td>
+                <td>Conservation of Linear Momentum</td>
+                <td>Moment of Inertia</td>
+                <td>Maxwell Wheel</td>
+                <td>Ballistic Pendulum</td>
+                <td>Conservation of Mechanical Energy</td>
+            </tr>
+            <!-- Experiment PDF -->
+            <tr>
+                <td class="row-header">Experiment PDF</td>
+                <td>
+                    <a href="Exp 0 Error Analysis and construction of graphs v2.3.pdf">Exp 0 Error Analysis</a><br>
+                    <a href="Exp 0 Lab zero_Excel sheet new.pdf">Exp 0 Lab zero Excel</a><br>
+                    <a href="Exp 1 - Fine mesuerments (V2.8).pdf">Exp 1 Fine Measurements</a>
+                </td>
+                <td><a href="Exp 2 Lab manual.pdf">Exp 2 Lab Manual</a></td>
+                <td><a href="Exp 2 part 2 - Projectile Motion.pdf">Exp 2 Projectile Motion</a></td>
+                <td><a href="redo kinematics of linear motion.mp4">Kinematics Video (.mp4)</a></td>
+                <td><a href="Exp 3.pdf">Exp 3 Manual</a></td>
+                <td><a href="Exp 4_Friction final.pdf">Exp 4 Friction</a></td>
+                <td><a href="Exp 5 Centripetal Force Lab Manual.pdf">Exp 5 Centripetal</a></td>
+                <td><a href="Exp 6.pdf">Exp 6 Manual</a></td>
+                <td><a href="Exp 7 Moment of Inertia lab manual.pdf">Exp 7 Moment of Inertia</a></td>
+                <td><a href="Exp 8 Maxwell Wheel lab manual.pdf">Exp 8 Maxwell Wheel</a></td>
+                <td><a href="Classical Mechanics Exp 11 Report v1.7.xlsx">Exp 11 Report (.xlsx)</a></td>
+                <td><a href="Exp 13 Conservation_of_Mechanical_Energy_in_a_Vertical_Spring_Manual.pdf">Exp 13 Manual</a></td>
+            </tr>
+            <!-- Experiment Excel -->
+            <tr>
+                <td class="row-header">Experiment Excel</td>
+                <td><a href="Classical Mechanics Exp 1 .xlsx">Exp 1 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 2 .xlsm">Exp 2 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 2 part 2.xlsx">Exp 2 Part 2 Sheet</a></td>
+                <td>-</td>
+                <td><a href="Classical Mechanics Exp 3 .xlsm">Exp 3 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 4 Friction force.xlsm">Exp 4 Friction Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 5 Report v2.1.xlsm">Exp 5 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 6 Report v2.2.xlsm">Exp 6 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 7 Report v2.1.xlsm">Exp 7 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 8 Report v2.1.xlsm">Exp 8 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 11 Report v1.7.xlsm">Exp 11 Sheet</a></td>
+                <td><a href="Classical Mechanics Exp 13 Report v2.1.xlsm">Exp 13 Sheet</a></td>
+            </tr>
+            <!-- Other Data -->
+            <tr class="other-data">
+                <td class="row-header other-data">Other Data</td>
+                <td><a href="Exp 1 - Fine mesuerments (V2.8).docx">Exp 1 Doc</a></td>
+                <td><a href="Videos.docx">Videos Doc</a></td>
+                <td><a href="Introduction to Statistics.mp4">Intro Stats (.mp4)</a></td>
+                <td><a href="Presentation1 Fine measurments V8.2.pptx">Presentation 1</a></td>
+                <td><a href="Presentation2 Kinematics of Linear Motion V6.1.ppt">Presentation 2</a></td>
+                <td><a href="Presentation3 Newton_s Laws of Linear Motion V4.5.pptx">Presentation 3</a></td>
+                <td><a href="Presentation5 Centrepital Force V2.4.pptx">Presentation 5</a></td>
+                <td><a href="Conservation_of_Mechanical_Energy_in_a_Vertical_Spring_Manual.docx">Spring Manual Doc</a></td>
+                <td><a href="Conservation of energy in a vertical spring.pptx">Energy Presentation</a></td>
+                <td>-</td><td>-</td><td>-</td>
+            </tr>
+        </table>
+    </div>
 
-  async function saveFiles(files) {
-    const db = await openDB();
-    const tx = db.transaction(STORE_NAME, 'readwrite');
-    const store = tx.objectStore(STORE_NAME);
-    for (const file of files) {
-      const arrayBuffer = await file.arrayBuffer();
-      store.put({ name: file.name, data: arrayBuffer, type: file.type });
-    }
-    document.getElementById('status').innerText = 'Files saved permanently!';
-    loadSavedFiles();
-  }
-
-  async function loadSavedFiles() {
-    const db = await openDB();
-    const tx = db.transaction(STORE_NAME, 'readonly');
-    const store = tx.objectStore(STORE_NAME);
-    const request = store.openCursor();
-    
-    request.onsuccess = (e) => {
-      const cursor = e.target.result;
-      if (cursor) {
-        const { name, data, type } = cursor.value;
-        const blob = new Blob([data], { type });
-        const objectUrl = URL.createObjectURL(blob);
-        
-        // Update all links pointing to this file name
-        document.querySelectorAll(`a[href$="${name}"]`).forEach(link => {
-          link.href = objectUrl;
-          link.target = "_blank";
-        });
-        cursor.continue();
-      }
-    };
-  }
-
-  document.getElementById('folderInput').addEventListener('change', (e) => {
-    saveFiles(e.target.files);
-  });
-
-  // Load automatically on page load if already saved
-  window.addEventListener('DOMContentLoaded', loadSavedFiles);
-</script>
+</body>
+</html>
